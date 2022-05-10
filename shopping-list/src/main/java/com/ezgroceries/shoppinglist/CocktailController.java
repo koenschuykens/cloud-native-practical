@@ -1,21 +1,19 @@
 package com.ezgroceries.shoppinglist;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.rmi.ServerException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/cocktails", produces = "application/json")
 public class CocktailController {
 
-    @GetMapping
-    public ResponseEntity< List <CocktailResource>> get(@RequestParam String search) {
+    @GetMapping(value = "/cocktails", produces = "application/json")
+    public ResponseEntity<List <CocktailResource>> get(@RequestParam String search) {
         return ResponseEntity.ok((getDummyResources()));
     }
 
@@ -33,5 +31,16 @@ public class CocktailController {
                         "Rub rim of cocktail glass with lime juice. Dip rim in coarse salt..",
                         "https://www.thecocktaildb.com/images/media/drink/qtvvyq1439905913.jpg",
                         Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
+    }
+
+
+
+    @PostMapping(value = "/shopping-lists", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<ShoppingList> create(@RequestBody String name) {
+        return ResponseEntity.ok(createShoppingList(name));
+    }
+
+    private ShoppingList createShoppingList(String name){
+        return new ShoppingList(UUID.fromString("d615ec78-fe93-467b-8d26-5d26d8eab066"),name);
     }
 }
