@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.rmi.ServerException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -13,7 +12,7 @@ import java.util.UUID;
 public class CocktailController {
 
     @GetMapping(value = "/cocktails", produces = "application/json")
-    public ResponseEntity<List <CocktailResource>> get(@RequestParam String search) {
+    public ResponseEntity<List<CocktailResource>> get(@RequestParam String search) {
         return ResponseEntity.ok((getDummyResources()));
     }
 
@@ -34,13 +33,33 @@ public class CocktailController {
     }
 
 
+    /*@PostMapping(value = "/shopping-lists", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<ShoppingList> create(@RequestBody String name) {
+        ShoppingList shoppingList = new ShoppingList(UUID.fromString("d615ec78-fe93-467b-8d26-5d26d8eab066"), name);
+        return new ResponseEntity<>(shoppingList, HttpStatus.CREATED);
+    }*/
+
 
     @PostMapping(value = "/shopping-lists", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<ShoppingList> create(@RequestBody String name) {
-        return ResponseEntity.ok(createShoppingList(name));
+    public ResponseEntity<ShoppingListResource> create(@RequestBody String name) {
+        ShoppingListResource shoppingList = createShoppingList(name);
+        if (shoppingList != null)
+        {
+            return new ResponseEntity<>(shoppingList,HttpStatus.CREATED);
+        }
+        else {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+
+        }
     }
 
-    private ShoppingList createShoppingList(String name){
-        return new ShoppingList(UUID.fromString("d615ec78-fe93-467b-8d26-5d26d8eab066"),name);
+    private ShoppingListResource createShoppingList(String name){
+        return new ShoppingListResource(UUID.randomUUID(),name);
     }
+
+    /*
+    @PostMapping(value = "/shopping-lists", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<ShoppingList> add(@RequestParam UUID cocktailId, @RequestBody String name) {
+        return ResponseEntity.ok(addToShoppingList(name));
+    }*/
 }

@@ -2,16 +2,16 @@ package com.ezgroceries.shoppinglist;
 
 import java.util.UUID;
 
-public class ShoppingList {
+public class ShoppingListResource {
 
     private UUID shoppingListId;
     private String name;
 
-    public ShoppingList(){
+    public ShoppingListResource(){
 
     }
 
-    public ShoppingList (UUID shoppingListId, String name){
+    public ShoppingListResource(UUID shoppingListId, String name){
         this.name = name;
         this.shoppingListId = shoppingListId;
     }
