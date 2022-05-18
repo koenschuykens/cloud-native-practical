@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist;
+package com.ezgroceries.shoppinglist.Resources;
 import java.util.*;
 public class CocktailResource {
 
