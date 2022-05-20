@@ -1,5 +1,7 @@
 package com.ezgroceries.shoppinglist.Resources;
 
+import com.ezgroceries.shoppinglist.Controller.CocktailController;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -8,7 +10,7 @@ public class ShoppingListResource {
 
     private UUID shoppingListId;
     private String name;
-    private List<CocktailId> cocktails = new ArrayList<>();
+    private List<CocktailController.CocktailId> cocktails = new ArrayList<>();
 
     public ShoppingListResource(){
 
@@ -17,7 +19,7 @@ public class ShoppingListResource {
         this.shoppingListId = shoppingListId;
         this.name = name;
     }
-    public ShoppingListResource(UUID shoppingListId, String name, List<CocktailId> cocktails) {
+    public ShoppingListResource(UUID shoppingListId, String name, List<CocktailController.CocktailId> cocktails) {
         this.shoppingListId = shoppingListId;
         this.name = name;
         this.cocktails = cocktails;
@@ -40,11 +42,11 @@ public class ShoppingListResource {
         this.name = name;
     }
 
-    public List<CocktailId> getCocktails() {
+    public List<CocktailController.CocktailId> getCocktails() {
         return cocktails;
     }
 
-    public void setCocktails(List<CocktailId> cocktails) {
+    public void setCocktails(List<CocktailController.CocktailId> cocktails) {
         this.cocktails = cocktails;
     }
 }

@@ -21,4 +21,30 @@ public class CocktailController {
         System.out.println("Part 1");
         return ResponseEntity.ok((cocktailDBClient.searchCocktails(search)));
     }
+
+    public static class CocktailId {
+
+        private String cocktailId;
+
+        /* No args constructor */
+        public CocktailId() {
+        }
+
+        /* All args constructor */
+        public CocktailId(String cocktailId) {
+
+            this.cocktailId = cocktailId;
+
+        }
+
+        public String getCocktailId() {
+            return cocktailId;
+        }
+
+        public void setCocktailId(String cocktailId) {
+            this.cocktailId = cocktailId;
+        }
+
+
+    }
 }
