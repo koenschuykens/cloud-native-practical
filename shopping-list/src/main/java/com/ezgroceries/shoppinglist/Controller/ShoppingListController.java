@@ -21,22 +21,6 @@ public class ShoppingListController {
     @Autowired
     private CocktailDBClient cocktailDBClient;
 
-    private List<CocktailResource> getDummyResources() {
-        return Arrays.asList(
-                new CocktailResource(
-                        UUID.fromString("23b3d85a-3928-41c0-a533-6538a71e17c4"), "Margerita",
-                        "Cocktail glass",
-                        "Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten..",
-                        "https://www.thecocktaildb.com/images/media/drink/wpxpvu1439905379.jpg",
-                        Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt")),
-                new CocktailResource(
-                        UUID.fromString("d615ec78-fe93-467b-8d26-5d26d8eab073"), "Blue Margerita",
-                        "Cocktail glass",
-                        "Rub rim of cocktail glass with lime juice. Dip rim in coarse salt..",
-                        "https://www.thecocktaildb.com/images/media/drink/qtvvyq1439905913.jpg",
-                        Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
-    }
-
     /* part 2 create shopping list */
     @PostMapping(value = "/shopping-lists", consumes = "application/json", produces = "application/json")
     public ResponseEntity <List<ShoppingListResource>> create(@RequestBody List<ShoppingListResource> shoppingListResources) throws JsonParseException {
@@ -109,7 +93,7 @@ public class ShoppingListController {
         CocktailDBResponse response = cocktailDBClient.searchCocktails("Russian");
         for(int i=0;i <response.getDrinks().size();i++){
             CocktailResource singleCocktailResource = new CocktailResource(
-                    UUID.fromString(response.getDrinks().get(i).getIdDrink()),
+                    response.getDrinks().get(i).getIdDrink(),
                     response.getDrinks().get(i).getStrDrink(),
                     response.getDrinks().get(i).getStrGlass(),
                     response.getDrinks().get(i).getStrInstructions(),

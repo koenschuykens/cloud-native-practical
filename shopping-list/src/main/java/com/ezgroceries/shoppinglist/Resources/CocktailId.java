@@ -5,24 +5,24 @@ import java.util.UUID;
 
 public class CocktailId {
 
-    private UUID cocktailId;
+    private String cocktailId;
 
     /* No args constructor */
     public CocktailId() {
     }
 
     /* All args constructor */
-    public CocktailId(UUID cocktailId) {
+    public CocktailId(String cocktailId) {
 
         this.cocktailId = cocktailId;
 
     }
 
-    public UUID getCocktailId() {
+    public String getCocktailId() {
         return cocktailId;
     }
 
-    public void setCocktailId(UUID cocktailId) {
+    public void setCocktailId(String cocktailId) {
         this.cocktailId = cocktailId;
     }
 

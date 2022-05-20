@@ -2,7 +2,7 @@ package com.ezgroceries.shoppinglist.Resources;
 import java.util.*;
 public class CocktailResource {
 
-    private UUID cocktailId;
+    private String cocktailId;
     private String name;
     private String glass;
     private String instructions;
@@ -14,7 +14,7 @@ public class CocktailResource {
     }
 
     /* All args constructor */
-    public CocktailResource(UUID cocktailId, String name, String glass, String instructions, String image,
+    public CocktailResource(String cocktailId, String name, String glass, String instructions, String image,
                             List<String> ingredients) {
 
         this.cocktailId = cocktailId;
@@ -25,11 +25,11 @@ public class CocktailResource {
         this.ingredients = ingredients;
     }
 
-    public UUID getCocktailId() {
+    public String getCocktailId() {
         return cocktailId;
     }
 
-    public void setCocktailId(UUID cocktailId) {
+    public void setCocktailId(String cocktailId) {
         this.cocktailId = cocktailId;
     }
 
