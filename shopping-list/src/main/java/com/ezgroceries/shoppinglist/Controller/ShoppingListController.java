@@ -1,5 +1,7 @@
 package com.ezgroceries.shoppinglist.Controller;
 
+import com.ezgroceries.shoppinglist.Controller.resources.CocktailId;
+import com.ezgroceries.shoppinglist.Controller.resources.ShoppingListOut;
 import com.ezgroceries.shoppinglist.Database.CocktailDBClient;
 import com.ezgroceries.shoppinglist.Database.CocktailDBResponse;
 import com.ezgroceries.shoppinglist.Resources.CocktailResource;
@@ -34,15 +36,15 @@ public class ShoppingListController {
 
     /* Part 3 - add cocktails to list */
     @PostMapping(value = "/shopping-lists/{shoppingListId}/cocktails", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<List<CocktailController.CocktailId>> create(@PathVariable UUID shoppingListId, @RequestBody List<CocktailResource> cocktailResourceList ) {
+    public ResponseEntity<List<CocktailId>> create(@PathVariable UUID shoppingListId, @RequestBody List<CocktailResource> cocktailResourceList ) {
 
         System.out.println("Part 3");
 
-        List<CocktailController.CocktailId> cocktailIdList = new ArrayList<>();
+        List<CocktailId> cocktailIdList = new ArrayList<>();
         ShoppingListResource shoppingListResource = shoppinglists.get(shoppingListId);
 
         for (CocktailResource cocktail:cocktailResourceList){
-            CocktailController.CocktailId cocktailId = new CocktailController.CocktailId(cocktail.getCocktailId());
+            CocktailId cocktailId = new CocktailId(cocktail.getCocktailId());
             cocktailIdList.add(cocktailId);
         }
         if (cocktailIdList != null)
@@ -88,7 +90,7 @@ public class ShoppingListController {
 
         List<String> shoppingListIngredients = new ArrayList<>();
         List<CocktailResource> cocktailResourceList = new ArrayList<CocktailResource>();
-        CocktailDBResponse response = cocktailDBClient.searchCocktails("Russian");
+        CocktailDBResponse response = cocktailDBClient.searchAllCocktails();
         for(int i=0;i <response.getDrinks().size();i++){
             CocktailResource singleCocktailResource = new CocktailResource(
                     response.getDrinks().get(i).getIdDrink(),
@@ -100,12 +102,12 @@ public class ShoppingListController {
             cocktailResourceList.add(singleCocktailResource);
         }
 
-        List<CocktailController.CocktailId> cocktailIdList = shoppingListResource.getCocktails();
+        List<CocktailId> cocktailIdList = shoppingListResource.getCocktails();
         ShoppingListOut shoppingListOut = new ShoppingListOut();
         shoppingListOut.setShoppingListId(shoppingListResource.getShoppingListId());
         shoppingListOut.setName(shoppingListResource.getName());
         shoppingListIngredients.clear();
-        for (CocktailController.CocktailId cocktailId :cocktailIdList){
+        for (CocktailId cocktailId :cocktailIdList){
             for(CocktailResource cocktailResource : cocktailResourceList)
             {
                 System.out.println(cocktailResource.getCocktailId());
@@ -122,62 +124,4 @@ public class ShoppingListController {
         return shoppingListOut;
     }
 
-    public static class ShoppingListOut {
-
-        private UUID shoppingListId;
-        private String name;
-
-        List<String> shoppingListIngredient;
-
-
-        public ShoppingListOut(UUID shoppingListId) {
-            this.shoppingListId = shoppingListId;
-        }
-
-        public ShoppingListOut() {
-        }
-
-        public UUID getShoppingListId() {
-            return shoppingListId;
-        }
-
-        public void setShoppingListId(UUID shoppingListId) {
-            this.shoppingListId = shoppingListId;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public List<String> getShoppingListIngredientList() {
-            return shoppingListIngredient;
-        }
-
-        public void setShoppingListIngredientList(List<String> shoppingListIngredient) {
-            this.shoppingListIngredient = shoppingListIngredient;
-        }
-    }
-
-    public static class ShoppingListIngredients {
-        List<String> shoppingListIngredient;
-
-        public ShoppingListIngredients() {
-        }
-
-        public ShoppingListIngredients(List<String> shoppingListIngredient) {
-            this.shoppingListIngredient = shoppingListIngredient;
-        }
-
-        public List<String> getShoppingListIngredient() {
-            return shoppingListIngredient;
-        }
-
-        public void setShoppingListIngredient(List<String> shoppingListIngredient) {
-            this.shoppingListIngredient = shoppingListIngredient;
-        }
-    }
 }
