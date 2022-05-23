@@ -90,7 +90,7 @@ public class ShoppingListController {
 
         List<String> shoppingListIngredients = new ArrayList<>();
         List<CocktailResource> cocktailResourceList = new ArrayList<CocktailResource>();
-        CocktailDBResponse response = cocktailDBClient.searchAllCocktails();
+        CocktailDBResponse response = cocktailDBClient.searchCocktails("Russian");
         for(int i=0;i <response.getDrinks().size();i++){
             CocktailResource singleCocktailResource = new CocktailResource(
                     response.getDrinks().get(i).getIdDrink(),
