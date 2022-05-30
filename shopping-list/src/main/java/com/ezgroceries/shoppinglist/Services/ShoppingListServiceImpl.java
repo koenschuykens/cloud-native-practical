@@ -1,10 +1,12 @@
 package com.ezgroceries.shoppinglist.Services;
 
 import com.ezgroceries.shoppinglist.Controller.resources.CocktailId;
+import com.ezgroceries.shoppinglist.Controller.resources.ShoppingListOut;
 import com.ezgroceries.shoppinglist.repositories.CocktailEntity;
 import com.ezgroceries.shoppinglist.repositories.ShoppingListEntity;
 import com.ezgroceries.shoppinglist.repositories.ShoppingListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,4 +37,12 @@ public class ShoppingListServiceImpl implements ShoppingListService {
         return (shoppingList);
 
     }
+
+    public List<ShoppingListEntity> getAllShoppingLists(){
+        List<ShoppingListEntity> shoppingListAll = new ArrayList<>();
+        shoppingListAll.add(shoppingListRepository.get)
+        return shoppingListAll;
+
+    }
+
 }

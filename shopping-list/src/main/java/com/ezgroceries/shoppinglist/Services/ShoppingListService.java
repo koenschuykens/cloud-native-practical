@@ -12,4 +12,5 @@ public interface ShoppingListService {
     ShoppingListEntity addShoppingList(ShoppingListEntity shoppingList);
     ShoppingListEntity readShoppingList(UUID uuid);
     ShoppingListEntity setCocktails(UUID uuid, List<CocktailEntity> cocktailIds);
+    List<ShoppingListEntity> getAllShoppingLists();
 }

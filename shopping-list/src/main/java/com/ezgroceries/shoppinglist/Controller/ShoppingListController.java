@@ -19,7 +19,7 @@ import java.util.*;
 
 @RestController
 public class ShoppingListController {
-    Map<UUID, ShoppingListResource> shoppinglists = new HashMap<UUID,ShoppingListResource>();
+    //Map<UUID, ShoppingListResource> shoppinglists = new HashMap<UUID,ShoppingListResource>();
     @Autowired private ShoppingListService shoppingListService;
 
     @Autowired
@@ -40,7 +40,7 @@ public class ShoppingListController {
         return new ResponseEntity<>(shoppingListEntityList, HttpStatus.CREATED);
     }
 
-    /* Part 3 - add cocktails to list */
+    /* Part 3 - add cocktails to list database versie */
     @PostMapping(value = "/shopping-lists/{shoppingListId}/cocktails", consumes = "application/json", produces = "application/json")
     public ResponseEntity<List<CocktailEntity>> create(@PathVariable UUID shoppingListId, @RequestBody List<CocktailEntity> cocktailResourceList ) {
 
@@ -81,7 +81,7 @@ public class ShoppingListController {
     public ResponseEntity<List<ShoppingListOut>> get() {
 
         System.out.println("Part 5");
-        Set<UUID> keys = shoppinglists.keySet();
+        Set<UUID> keys = shoppingListService.;
         List<ShoppingListOut> shoppingListOuts = new ArrayList<>();
 
         for(int j=0;j<shoppinglists.size();j++){
