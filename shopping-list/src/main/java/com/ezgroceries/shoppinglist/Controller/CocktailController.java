@@ -1,7 +1,6 @@
 package com.ezgroceries.shoppinglist.Controller;
 
 import com.ezgroceries.shoppinglist.Database.CocktailDBClient;
-import com.ezgroceries.shoppinglist.Database.CocktailDBResponse;
 import com.ezgroceries.shoppinglist.Resources.CocktailResource;
 import com.ezgroceries.shoppinglist.Resources.ShoppingListResource;
 import com.ezgroceries.shoppinglist.Services.CocktailService;
@@ -26,8 +25,7 @@ public class CocktailController {
     @GetMapping(value = "/cocktails", produces = "application/json")
     public ResponseEntity<List<CocktailEntity>> get(@RequestParam String search) {
         System.out.println("Part 1");
-        System.out.println(search);
-        return ResponseEntity.ok((cocktailService.readCocktails(search.toString())));
+        return ResponseEntity.ok((cocktailService.readCocktail(search.toString())));
     }
 
     /* part 2 create cocktails */
@@ -41,7 +39,7 @@ public class CocktailController {
             cocktailEntity.setCocktailId(UUID.randomUUID());
             cocktailEntity.setName(cocktailResource2.getName());
             cocktailEntity.setIngredients(new HashSet<>(cocktailResource2.getIngredients()));
-            cocktailEntityList.add(cocktailService.saveCocktailEntity(cocktailEntity));
+            cocktailEntityList.add(cocktailService.addCocktail(cocktailEntity));
         }
         return new ResponseEntity<>(cocktailEntityList, HttpStatus.CREATED);
     }
