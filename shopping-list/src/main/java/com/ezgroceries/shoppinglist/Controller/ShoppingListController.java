@@ -6,6 +6,7 @@ import com.ezgroceries.shoppinglist.Database.CocktailDBClient;
 import com.ezgroceries.shoppinglist.Database.CocktailDBResponse;
 import com.ezgroceries.shoppinglist.Resources.CocktailResource;
 import com.ezgroceries.shoppinglist.Resources.ShoppingListResource;
+import com.ezgroceries.shoppinglist.Services.ShoppingListService;
 import com.fasterxml.jackson.core.JsonParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import java.util.*;
 @RestController
 public class ShoppingListController {
     Map<UUID, ShoppingListResource> shoppinglists = new HashMap<UUID,ShoppingListResource>();
+    private ShoppingListService shoppingListService;
 
     @Autowired
     private CocktailDBClient cocktailDBClient;
@@ -86,7 +88,6 @@ public class ShoppingListController {
     }
 
     private ShoppingListOut LoopThroughCocktails(ShoppingListResource shoppingListResource){
-
 
         List<String> shoppingListIngredients = new ArrayList<>();
         List<CocktailResource> cocktailResourceList = new ArrayList<CocktailResource>();
