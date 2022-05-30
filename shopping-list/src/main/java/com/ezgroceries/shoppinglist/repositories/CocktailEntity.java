@@ -7,7 +7,7 @@ import java.util.*;
 @Data
 @Entity
 @Table(name = "cocktail")
-public class CocktailEntity {
+    public class CocktailEntity {
     @Column(name = "cocktail_id", nullable = false)
     @Id
     @GeneratedValue

@@ -7,6 +7,7 @@ import com.ezgroceries.shoppinglist.Database.CocktailDBResponse;
 import com.ezgroceries.shoppinglist.Resources.CocktailResource;
 import com.ezgroceries.shoppinglist.Resources.ShoppingListResource;
 import com.ezgroceries.shoppinglist.Services.ShoppingListService;
+import com.ezgroceries.shoppinglist.repositories.ShoppingListEntity;
 import com.fasterxml.jackson.core.JsonParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,22 +19,25 @@ import java.util.*;
 @RestController
 public class ShoppingListController {
     Map<UUID, ShoppingListResource> shoppinglists = new HashMap<UUID,ShoppingListResource>();
-    private ShoppingListService shoppingListService;
+    @Autowired private ShoppingListService shoppingListService;
 
     @Autowired
     private CocktailDBClient cocktailDBClient;
 
     /* part 2 create shopping list */
     @PostMapping(value = "/shopping-lists", consumes = "application/json", produces = "application/json")
-    public ResponseEntity <List<ShoppingListResource>> create(@RequestBody List<ShoppingListResource> shoppingListResources) throws JsonParseException {
+    public ResponseEntity <List<ShoppingListEntity>> create(@RequestBody List<ShoppingListResource> shoppingListResources) throws JsonParseException {
         System.out.println("Part 2");
-        List<ShoppingListResource> shoppingListResourceList = new ArrayList<>();
+        List<ShoppingListEntity> shoppingListEntityList = new ArrayList<>();
+        ShoppingListEntity shoppingListEntity = new ShoppingListEntity();
         for (ShoppingListResource shoppingListResource2 : shoppingListResources) {
                 shoppingListResource2.setShoppingListId(UUID.randomUUID());
-                shoppinglists.put(shoppingListResource2.getShoppingListId(), shoppingListResource2);
-                shoppingListResourceList.add(shoppingListResource2);
+                //shoppinglists.put(shoppingListResource2.getShoppingListId(), shoppingListResource2);
+                shoppingListEntity.setShoppingListID(UUID.randomUUID());
+                shoppingListEntity.setName(shoppingListResource2.getName());
+                shoppingListEntityList.add(shoppingListService.saveShoppingList(shoppingListEntity));
         }
-        return new ResponseEntity<>(shoppingListResourceList, HttpStatus.CREATED);
+        return new ResponseEntity<>(shoppingListEntityList, HttpStatus.CREATED);
     }
 
     /* Part 3 - add cocktails to list */

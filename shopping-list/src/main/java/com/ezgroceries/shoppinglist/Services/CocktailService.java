@@ -1,17 +1,21 @@
 package com.ezgroceries.shoppinglist.Services;
 
-import com.ezgroceries.shoppinglist.repositories.ShoppingListEntity;
+import com.ezgroceries.shoppinglist.repositories.CocktailEntity;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-public interface ShoppingListService {
+import java.util.List;
+
+public interface CocktailService {
 
     // Save operation
-    ShoppingListEntity saveShoppingList(ShoppingListEntity shoppingList);
+    CocktailEntity saveCocktailEntity(CocktailEntity cocktailEntity);
 
     // Read operation
-    /*List<ShoppingListEntity> fetchShoppingListList();
+    List<CocktailEntity> readCocktails(String name);
 
-    ShoppingListEntity getShoppingListById(UUID shoppingListId);
+    /*ShoppingListEntity getShoppingListById(UUID shoppingListId);
     // Update operation
     ShoppingListEntity updateShoppingList(ShoppingListEntity shoppingList,
                                           UUID shoppingListId);
