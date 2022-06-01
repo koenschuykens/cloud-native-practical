@@ -77,7 +77,7 @@ public class ShoppingListController {
         return new ResponseEntity<>(shoppingListOut,HttpStatus.OK);
     }
     /* Part 5 - get all shopping lists */
-    @GetMapping(value = "/shopping-listsall", produces = "application/json")
+    /*@GetMapping(value = "/shopping-listsall", produces = "application/json")
     public ResponseEntity<List<ShoppingListOut>> get() {
 
         System.out.println("Part 5");
@@ -92,7 +92,7 @@ public class ShoppingListController {
             shoppingListOuts.add(shoppingListOut);
         }
         return new ResponseEntity<>(shoppingListOuts,HttpStatus.OK);
-    }
+    }*/
 
     private ShoppingListOut LoopThroughCocktails(ShoppingListResource shoppingListResource){
 
